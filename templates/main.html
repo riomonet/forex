@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+	<link href="/static/app.css" rel="stylesheet"/>
+    </head>
+    <body>
+
+	<h2> {{output}}</h2>
+	<form action="/next">
+	    <fieldset>
+		<legend>CURRENCY CONVERTER </legend>
+		<p>
+		    <label for="from">From:</label>
+		    <select name="from" type="text" value=""/>
+		    {% for name,des in currency_list %}
+			{% if des.get('code') == frm%}
+				<option value={{des.get('code')}} selected>{{des.get('code')}} - {{des.get('description')}}</option>
+			{% else %}
+				<option value={{des.get('code')}}>{{des.get('code')}} - {{des.get('description')}}</option>
+			{% endif %}
+		    {% endfor %}
+		</select>
+		</p>		
+		<p>
+		    <label for="to">To:</label>
+		    <select name="to" type="text" value=""/>
+			{% for name,des in currency_list %}
+			    {% if des.get('code') == to%}
+				    <option value={{des.get('code')}} selected>{{des.get('code')}} - {{des.get('description')}}</option>
+			    {% else %}
+				    <option value={{des.get('code')}}>{{des.get('code')}} - {{des.get('description')}}</option>
+			    {% endif %}
+			{% endfor %}
+		    </select>
+		</p>
+
+		<p>
+		    <label for="amount">Amount:</label>
+
+		    {% if frm == 'BTC' %}
+			    <input name="amount" type="number" step=".00000001" value={{amount}} required/>
+		    {% else %}
+			    <input name="amount" type="number" step=".01" value={{amount}} required/>
+		    {% endif %}
+		    
+		    
+		</p>
+		<button type="submit">Submit</button>
+	    </fieldset>
+	</form>
+
+	<p> Prices updated Daily </p>
+
+	<h2>On Bitcoin</h2>
+	<p>
+	    “Total circulation will be 21,000,000 coins. It’ll be distributed to network nodes when they make blocks, with the amount cut in half every 4 years. first 4 years: 10,500,000 coins next 4 years: 5,250,000 coins next 4 years: 2,625,000 coins next 4 years: 1,312,500 coins etc... When that runs out, the system can support transaction fees if needed. It’s based on open market competition, and there will probably always be nodes willing to process transactions for free.”
+	    ― Satoshi Nakamoto 
+	</p>
+    </body>
+</html>
